@@ -1,0 +1,25 @@
+{
+  "name": "test-proxies",
+  "version": "1.0.0",
+  "description": "Testing repo for proxy tests",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gippy/test-proxies.git"
+  },
+  "author": "Jaroslav Hejlek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gippy/test-proxies/issues"
+  },
+  "homepage": "https://github.com/gippy/test-proxies#readme",
+  "dependencies": {
+    "apify": "^0.5.12",
+    "bluebird": "^3.5.1",
+    "lodash": "^4.17.5",
+    "request": "git+https://github.com/metalwarrior665/request.git"
+  }
+}
