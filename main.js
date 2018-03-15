@@ -57,7 +57,11 @@ Apify.main(async () => {
                 if (!response) throw new Error('Page could not be opened');
                 await Apify.pushData({ proxyUrl, ...response });
             } catch (error) {
-                await Apify.pushData({ proxyUrl, error: error.message });
+                try {
+                  await Apify.pushData({ proxyUrl, error: error.message });
+                } catch (e) {
+                  console.error(e);
+                }
             }
         }, { concurrency: 100 });
     }, { concurrency: 2 });
