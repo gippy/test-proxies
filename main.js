@@ -13,6 +13,10 @@ function requestPromise(url, options) {
   });
 }
 
+const randomDelay = delay => new Promise((resolve) => {
+    setTimeout(resolve, _.random(0, delay));
+});
+
 async function getIpLocation(proxyUrl){
     try {
         const start = Date.now();
@@ -45,9 +49,10 @@ async function raceIpLocation(proxyUrl) {
 Apify.main(async () => {
     const input = await Apify.getValue('INPUT');
     await Promise.map(input, (proxyUrl) => {
-        const range = _.range(1000);
+        const range = _.range(2000);
         return Promise.map(range, async () => {
             try {
+                await randomDelay(500);
                 const response = await getIpLocation(proxyUrl);
                 if (!response) throw new Error('Page could not be opened');
                 await Apify.pushData({ proxyUrl, ...response });
@@ -55,5 +60,5 @@ Apify.main(async () => {
                 await Apify.pushData({ proxyUrl, error: error.message });
             }
         }, { concurrency: 50 });
-    }, { concurrency: 10 });
+    }, { concurrency: 5 });
 });
