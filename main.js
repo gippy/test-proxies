@@ -52,13 +52,13 @@ Apify.main(async () => {
         const range = _.range(2000);
         return Promise.map(range, async () => {
             try {
-                await randomDelay(500);
+                await randomDelay(10000);
                 const response = await getIpLocation(proxyUrl);
                 if (!response) throw new Error('Page could not be opened');
                 await Apify.pushData({ proxyUrl, ...response });
             } catch (error) {
                 await Apify.pushData({ proxyUrl, error: error.message });
             }
-        }, { concurrency: 50 });
-    }, { concurrency: 5 });
+        }, { concurrency: 100 });
+    }, { concurrency: 2 });
 });
